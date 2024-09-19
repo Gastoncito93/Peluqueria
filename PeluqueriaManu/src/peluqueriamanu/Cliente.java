@@ -1,32 +1,25 @@
 package peluqueriamanu;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
 class Cliente implements Comparable<Cliente>{
     
-    private int id;
-    private String name;
     private String lastname;
+    private String name;
     private int edad;
-    private LocalDate fechaCumpleaños;
+    private LocalDate fechaNacimiento;
     private Long telefono;
 
-    public Cliente(int id, String name, String lastname, int edad, LocalDate fechaCumpleaños, Long telefono) {
-        this.id = id;
-        this.name = name;
+    public Cliente(String lastname, String name, int edad, LocalDate fechaNacimiento, Long telefono) {
         this.lastname = lastname;
+        this.name = name;
         this.edad = edad;
-        this.fechaCumpleaños = fechaCumpleaños;
+        this.fechaNacimiento = fechaNacimiento;
         this.telefono = telefono;
     }
     
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
+    
+    
     public String getName() {
         return name;
     }
@@ -46,10 +39,10 @@ class Cliente implements Comparable<Cliente>{
         this.edad = edad;
     }
     public LocalDate getFechaCumpleaños() {
-        return fechaCumpleaños;
+        return fechaNacimiento;
     }
-    public void setFechaCumpleaños(LocalDate fechaCumpleaños) {
-        this.fechaCumpleaños = fechaCumpleaños;
+    public void fechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
     public Long getTelefono() {
         return telefono;
@@ -61,44 +54,32 @@ class Cliente implements Comparable<Cliente>{
     @Override
     public String toString() {
         return "Cliente{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", edad=" + edad +
-                ", fechaCumpleaños=" + fechaCumpleaños +
-                ", telefono=" + telefono +
-                '}';
+            "lastname='" + lastname + '\'' +
+            ", name='" + name + '\'' +
+            ", edad=" + edad +
+            ", fechaCumpleaños='" + fechaNacimiento + '\'' +
+            ", telefono=" + telefono +
+            '}';
     }
 
     
     @Override
-    public int compareTo(Cliente otroCliente) {
-        int result = this.id - otroCliente.id;
-        if (result != 0) {
-            return result;
-        }
-        result = this.name.compareTo(otroCliente.name);
-        if (result != 0) {
-            return result;
-        }
-        return this.lastname.compareTo(otroCliente.lastname);
+public int compareTo(Cliente otroCliente) {
+    int result = this.lastname.compareTo(otroCliente.lastname);
+    if (result != 0) {
+        return result;
     }
+    return this.name.compareTo(otroCliente.name);
+}
 
-    
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Cliente cliente = (Cliente) obj;
-        return id == cliente.id &&
-               name.equals(cliente.name) &&
-               lastname.equals(cliente.lastname);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, lastname);
-    }
+@Override
+public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null || getClass() != obj.getClass()) return false;
+    Cliente cliente = (Cliente) obj;
+    return lastname.equals(cliente.lastname) &&
+           name.equals(cliente.name);
+}
 
     
     

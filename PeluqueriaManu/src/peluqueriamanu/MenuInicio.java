@@ -6,6 +6,7 @@
 package peluqueriamanu;
 
 import java.util.TreeSet;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,11 +14,13 @@ import java.util.TreeSet;
  */
 public class MenuInicio extends javax.swing.JFrame {
 public static TreeSet<Cliente> clientes = new TreeSet<>();
+public static DefaultTableModel modelo = new DefaultTableModel();
     /**
      * Creates new form MenuInicio
      */
     public MenuInicio() {
         initComponents();
+        cargarModeloTabla();
     }
 
     /**
@@ -31,14 +34,15 @@ public static TreeSet<Cliente> clientes = new TreeSet<>();
 
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        jMAdministracion = new javax.swing.JMenu();
         jMIAgregarCliente = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jMBuscar = new javax.swing.JMenu();
+        jMIClientes = new javax.swing.JMenuItem();
+        jMSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Peluqueria - Barber and Choop");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(1024, 720));
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -51,7 +55,7 @@ public static TreeSet<Cliente> clientes = new TreeSet<>();
             .addGap(0, 697, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Administracion");
+        jMAdministracion.setText("Administracion");
 
         jMIAgregarCliente.setText("Agregar Cliente");
         jMIAgregarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -59,12 +63,24 @@ public static TreeSet<Cliente> clientes = new TreeSet<>();
                 jMIAgregarClienteActionPerformed(evt);
             }
         });
-        jMenu1.add(jMIAgregarCliente);
+        jMAdministracion.add(jMIAgregarCliente);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMAdministracion);
 
-        jMenu2.setText("Salir");
-        jMenuBar1.add(jMenu2);
+        jMBuscar.setText("Buscar");
+
+        jMIClientes.setText("Clientes");
+        jMIClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIClientesActionPerformed(evt);
+            }
+        });
+        jMBuscar.add(jMIClientes);
+
+        jMenuBar1.add(jMBuscar);
+
+        jMSalir.setText("Salir");
+        jMenuBar1.add(jMSalir);
 
         setJMenuBar(jMenuBar1);
 
@@ -88,6 +104,12 @@ public static TreeSet<Cliente> clientes = new TreeSet<>();
         escritorio.add(agregarCliente);
         agregarCliente.setVisible(true);
     }//GEN-LAST:event_jMIAgregarClienteActionPerformed
+
+    private void jMIClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIClientesActionPerformed
+        TablaClientes tablaClientes = new TablaClientes();
+        escritorio.add(tablaClientes);
+        tablaClientes.setVisible(true);
+    }//GEN-LAST:event_jMIClientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,12 +145,27 @@ public static TreeSet<Cliente> clientes = new TreeSet<>();
             }
         });
     }
+    
+    private void cargarModeloTabla(){
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Edad");
+        modelo.addColumn("Fecha de Nacimiento");
+        modelo.addColumn("Telefono");
+    }
+
+    private void agregarClienteTabla(Cliente clientes){
+        modelo.addRow(new Object[]{clientes.getName(), clientes.getLastname(), 
+            clientes.getEdad(), clientes.getFechaCumpleaños(), clientes.getTelefono()});
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JMenu jMAdministracion;
+    private javax.swing.JMenu jMBuscar;
     private javax.swing.JMenuItem jMIAgregarCliente;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuItem jMIClientes;
+    private javax.swing.JMenu jMSalir;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }
